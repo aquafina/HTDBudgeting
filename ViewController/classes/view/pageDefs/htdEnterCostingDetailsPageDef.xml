@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel"
+                version="11.1.1.64.93" id="htdEnterCostingDetailsPageDef"
+                Package="view.pageDefs">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables"/>
+    <iterator Binds="VO_XxSalesPlanningProgram2" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="VO_XxSalesPlanningProgram2Iterator" ChangeEventPolicy="ppr"/>
+    <iterator Binds="VO_XxHtdBudgetLines2" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="VO_XxHtdBudgetLines2Iterator" ChangeEventPolicy="ppr"/>
+    <searchRegion Binds="VO_XxHtdBudgetLines2Iterator" Criteria=""
+                  Customizer="oracle.jbo.uicli.binding.JUSearchBindingCustomizer"
+                  id="VO_XxHtdBudgetLines2Query"/>
+    <iterator Binds="VO_XXHtdBudgetHeader2" RangeSize="25"
+              DataControl="AppModuleDataControl"
+              id="VO_XXHtdBudgetHeader2Iterator" ChangeEventPolicy="ppr"/>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="VO_XxSalesPlanningProgram2Iterator"
+                     id="ProgramId">
+      <AttrNames>
+        <Item Value="ProgramId"/>
+      </AttrNames>
+    </attributeValues>
+    <action IterBinding="VO_XxSalesPlanningProgram2Iterator" id="First"
+            RequiresUpdateModel="true" Action="first"/>
+    <action IterBinding="VO_XxSalesPlanningProgram2Iterator" id="Previous"
+            RequiresUpdateModel="true" Action="previous"/>
+    <action IterBinding="VO_XxSalesPlanningProgram2Iterator" id="Next"
+            RequiresUpdateModel="true" Action="next"/>
+    <action IterBinding="VO_XxSalesPlanningProgram2Iterator" id="Last"
+            RequiresUpdateModel="true" Action="last"/>
+    <tree IterBinding="VO_XxHtdBudgetLines2Iterator" id="VO_XxHtdBudgetLines2">
+      <nodeDefinition DefName="model.ViewObject.VO_XxHtdBudgetLines"
+                      Name="VO_XxHtdBudgetLines20">
+        <AttrNames>
+          <Item Value="ArticleId"/>
+          <Item Value="BudgetHeaderId"/>
+          <Item Value="BudgetLinesId"/>
+          <Item Value="ColorId"/>
+          <Item Value="ProgramId"/>
+          <Item Value="SizeId"/>
+          <Item Value="Uniq"/>
+          <Item Value="Sizee"/>
+          <Item Value="Article"/>
+          <Item Value="Color"/>
+        </AttrNames>
+      </nodeDefinition>
+    </tree>
+    <attributeValues IterBinding="VO_XXHtdBudgetHeader2Iterator"
+                     id="BudgetHeaderId">
+      <AttrNames>
+        <Item Value="BudgetHeaderId"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VO_XXHtdBudgetHeader2Iterator"
+                     id="EffectedDateFrom">
+      <AttrNames>
+        <Item Value="EffectedDateFrom"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VO_XXHtdBudgetHeader2Iterator"
+                     id="EffectedDateTo">
+      <AttrNames>
+        <Item Value="EffectedDateTo"/>
+      </AttrNames>
+    </attributeValues>
+    <attributeValues IterBinding="VO_XXHtdBudgetHeader2Iterator"
+                     id="ProgramId1">
+      <AttrNames>
+        <Item Value="ProgramId"/>
+      </AttrNames>
+    </attributeValues>
+    <action id="Commit" RequiresUpdateModel="true" Action="commitTransaction"
+            DataControl="AppModuleDataControl"/>
+    <list IterBinding="VO_XxSalesPlanningProgram2Iterator" StaticList="false"
+          Uses="LOV_ProgramName" id="ProgramName1" DTSupportsMRU="true"/>
+    <methodAction id="closeHeader"
+                  InstanceName="AppModuleDataControl.dataProvider"
+                  DataControl="AppModuleDataControl" RequiresUpdateModel="true"
+                  Action="invokeMethod" MethodName="closeHeader"
+                  IsViewObjectMethod="false">
+      <NamedData NDName="programId" NDType="int"/>
+      <NamedData NDName="closingDate" NDType="java.sql.Date"/>
+    </methodAction>
+  </bindings>
+</pageDefinition>
